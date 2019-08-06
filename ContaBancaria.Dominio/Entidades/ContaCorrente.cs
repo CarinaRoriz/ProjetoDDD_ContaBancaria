@@ -8,7 +8,8 @@ namespace ContaBancaria.Dominio.Entidades
     {
         public decimal saldo { get; set; }
         public decimal limiteCredito { get; set; }
-        public Correntista correntista { get; set; }
+        public int IdCorrentista { get; set; }
+        public virtual Correntista correntista { get; set; }
 
         public string Creditar(decimal? valor)
         {

@@ -11,7 +11,7 @@ namespace ContaBancaria.Infra.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Correntista> builder)
         {
-            builder.ToTable("ContaCorrente");
+            builder.ToTable("Correntista");
 
             builder.HasKey(c => c.Id);
 
@@ -30,6 +30,10 @@ namespace ContaBancaria.Infra.Data.Mapping
             builder.Property(c => c.Endereco)
               .IsRequired()
               .HasColumnName("Endereco");
+
+            builder.HasMany(c => c.ContasCorrentes)
+            .WithOne(c => c.correntista)
+            .HasForeignKey(x => x.Id);
         }
     }
 }

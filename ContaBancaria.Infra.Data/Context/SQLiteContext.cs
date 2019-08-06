@@ -1,4 +1,5 @@
 ﻿using ContaBancaria.Dominio.Entidades;
+using ContaBancaria.Infra.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,8 @@ namespace ContaBancaria.Infra.Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ContaCorrente>(new UserMap().Configure);
-            modelBuilder.Entity<Correntista>(new UserMap().Configure);
+            modelBuilder.Entity<ContaCorrente>(new ContaCorrenteMap().Configure);
+            modelBuilder.Entity<Correntista>(new CorrentistaMap().Configure);
         }
     }
 }

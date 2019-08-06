@@ -84,7 +84,7 @@ namespace ContaBancaria.API.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             try

@@ -84,7 +84,7 @@ namespace ContaBancaria.API.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             try
@@ -99,6 +99,25 @@ namespace ContaBancaria.API.Controllers
             {
                 return BadRequest(ex);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Debitar([FromBody] decimal valor)
+        {
+            //try
+            //{
+            //    service.Post<ContaCorrenteValidator>(item);
+
+            //    return new ObjectResult(item.Id);
+            //}
+            //catch (ArgumentNullException ex)
+            //{
+            //    return NotFound(ex);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(ex);
+            //}
         }
     }
 }

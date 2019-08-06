@@ -23,9 +23,16 @@ namespace ContaBancaria.Infra.Data.Mapping
               .IsRequired()
               .HasColumnName("LimiteCredito");
 
-            builder.Property(c => c.correntista.Id)
+            builder.Property(c => c.IdCorrentista)
               .IsRequired()
               .HasColumnName("IdCorrentista");
+
+            builder.HasOne(c => c.correntista)
+            .WithMany(c => c.ContasCorrentes)
+            .HasForeignKey(x => x.IdCorrentista)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.SetNull);
+
         }
     }
 }

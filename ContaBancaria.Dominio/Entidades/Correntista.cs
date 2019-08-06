@@ -10,5 +10,6 @@ namespace ContaBancaria.Dominio.Entidades
         public string CPF { get; set; }
         public string Telefone { get; set; }
         public string Endereco { get; set; }
+        public virtual List<ContaCorrente> ContasCorrentes { get; set; }
     }
 }
