@@ -11,50 +11,31 @@ namespace ContaBancaria.Dominio.Entidades
         public int IdCorrentista { get; set; }
         public virtual Correntista correntista { get; set; }
 
-        public string Creditar(decimal? valor)
+        public void Creditar(decimal? valor)
         {
             if (valor == null || valor == 0)
             {
-                return "Favor informar um valor para creditar.";
+                throw new Exception("Favor informar um valor para creditar.");
             }
             else
             {
                 this.saldo = this.saldo + valor.Value;
-
-                var mensagemRetorno = "Crédito realizado com sucesso!";
-
-                var retorno = NotificarCOAF(valor.Value);
-
-                if (retorno)
-                {
-                    mensagemRetorno = mensagemRetorno + $"\nNotificação COAF: crédito realizado no valor de {valor.Value}";
-                }
-
-                return mensagemRetorno;
             }
         }
 
-        private bool NotificarCOAF(decimal valor)
+        public void Debitar(decimal? valor)
         {
-            if (valor > 50000)
-                return true;
-            else 
-                return false;
-        }
-
-        public string Debitar(decimal? valor)
-        {
-            if (valor == null || valor == 0) {
-                return "Favor informar um valor para debitar.";
+            if (valor == null || valor == 0)
+            {
+                throw new Exception("Favor informar um valor para debitar.");
             }
             else if (valor <= this.saldo + this.limiteCredito)
             {
                 this.saldo = this.saldo - valor.Value;
-                return $"Débito realizado com sucesso! Saldo atual {this.saldo}";
             }
             else
             {
-                return $"Você não possui saldo o suficiente. \nSaldo: {this.saldo}.";
+                throw new Exception($"Você não possui saldo o suficiente. \nSaldo: {this.saldo}.");
             }
         }
     }

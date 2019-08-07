@@ -19,13 +19,14 @@ namespace ContaBancaria.Service.Validators
 
             RuleFor(c => c.saldo)
                 .NotEmpty().WithMessage("É necessário informar o saldo.")
-                .NotNull().WithMessage("É necessário informar o saldo.");
+                .NotNull().WithMessage("É necessário informar o saldo.")
+                .GreaterThan(0).WithMessage("É necessário informar um saldo válido");
 
             RuleFor(c => c.limiteCredito)
                 .NotEmpty().WithMessage("É necessário informar o limite de crédito.")
                 .NotNull().WithMessage("É necessário informar o limite de crédito.");
 
-            RuleFor(c => c.correntista)
+            RuleFor(c => c.IdCorrentista)
                 .NotEmpty().WithMessage("É necessário informar o correntista.")
                 .NotNull().WithMessage("É necessário informar o correntista.");
         }

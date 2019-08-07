@@ -1,4 +1,5 @@
 ﻿using ContaBancaria.Dominio.Entidades;
+using ContaBancaria.Service.Dto;
 using ContaBancaria.Service.Services;
 using ContaBancaria.Service.Validators;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace ContaBancaria.API.Controllers
     [Route("api/[controller]")]
     public class ContaCorrenteController : ControllerBase
     {
-        private BaseService<ContaCorrente> service = new BaseService<ContaCorrente>();
+        private ContaCorrenteService service = new ContaCorrenteService();
 
         [HttpPost]
         public IActionResult Post([FromBody] ContaCorrente item)
@@ -101,23 +102,42 @@ namespace ContaBancaria.API.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Debitar([FromBody] decimal valor)
+        [HttpPost("debitar")]
+        public IActionResult Debitar([FromBody] ObjetoEntrada objetoEntrada)
         {
-            //try
-            //{
-            //    service.Post<ContaCorrenteValidator>(item);
+            try
+            {
+                var retorno = service.Debitar(objetoEntrada.id, objetoEntrada.valor);
 
-            //    return new ObjectResult(item.Id);
-            //}
-            //catch (ArgumentNullException ex)
-            //{
-            //    return NotFound(ex);
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex);
-            //}
+                return new ObjectResult(retorno);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return NotFound(ex);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPost("creditar")]
+        public IActionResult Creditar([FromBody] ObjetoEntrada objetoEntrada)
+        {
+            try
+            {
+                var retorno = service.Creditar(objetoEntrada.id, objetoEntrada.valor);
+
+                return new ObjectResult(retorno);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return NotFound(ex);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
