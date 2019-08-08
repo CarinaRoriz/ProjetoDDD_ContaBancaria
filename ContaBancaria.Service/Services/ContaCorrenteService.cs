@@ -13,7 +13,7 @@ namespace ContaBancaria.Service.Services
         public ContaCorrente Debitar(int id, decimal valor)
         {
             if (valor == 0)
-                throw new ArgumentException("Informe um valor para ser debitado.");
+                throw new Exception("Informe um valor para ser debitado.");
 
             var contaCorrente = repository.Select(id);
 
@@ -30,7 +30,7 @@ namespace ContaBancaria.Service.Services
         public ContaCorrente Creditar(int id, decimal valor)
         {
             if (valor == 0)
-                throw new ArgumentException("Informe um valor para ser creditado.");
+                throw new Exception("Informe um valor para ser creditado.");
 
             var contaCorrente = repository.Select(id);
 
